@@ -1,0 +1,1 @@
+const articleApiKey = '1ddea6c88b6049c09be436a4a800ce58';
