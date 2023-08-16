@@ -9,7 +9,7 @@ class SharedArticleState with _$SharedArticleState {
   const factory SharedArticleState({
     required final ArticleState articleState,
     required final ArticleState headlineArticleState,
-    required final List<String> watchedArticlesIds,
+    required final Set<String> watchedArticlesIds,
   }) = _SharedArticleState;
 
   factory SharedArticleState.fromJson(Map<String, dynamic> json) =>

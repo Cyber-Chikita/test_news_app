@@ -22,7 +22,7 @@ SharedArticleState _$SharedArticleStateFromJson(Map<String, dynamic> json) {
 mixin _$SharedArticleState {
   ArticleState get articleState => throw _privateConstructorUsedError;
   ArticleState get headlineArticleState => throw _privateConstructorUsedError;
-  List<String> get watchedArticlesIds => throw _privateConstructorUsedError;
+  Set<String> get watchedArticlesIds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +39,7 @@ abstract class $SharedArticleStateCopyWith<$Res> {
   $Res call(
       {ArticleState articleState,
       ArticleState headlineArticleState,
-      List<String> watchedArticlesIds});
+      Set<String> watchedArticlesIds});
 
   $ArticleStateCopyWith<$Res> get articleState;
   $ArticleStateCopyWith<$Res> get headlineArticleState;
@@ -74,7 +74,7 @@ class _$SharedArticleStateCopyWithImpl<$Res, $Val extends SharedArticleState>
       watchedArticlesIds: null == watchedArticlesIds
           ? _value.watchedArticlesIds
           : watchedArticlesIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as Set<String>,
     ) as $Val);
   }
 
@@ -106,7 +106,7 @@ abstract class _$$_SharedArticleStateCopyWith<$Res>
   $Res call(
       {ArticleState articleState,
       ArticleState headlineArticleState,
-      List<String> watchedArticlesIds});
+      Set<String> watchedArticlesIds});
 
   @override
   $ArticleStateCopyWith<$Res> get articleState;
@@ -141,7 +141,7 @@ class __$$_SharedArticleStateCopyWithImpl<$Res>
       watchedArticlesIds: null == watchedArticlesIds
           ? _value._watchedArticlesIds
           : watchedArticlesIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as Set<String>,
     ));
   }
 }
@@ -152,7 +152,7 @@ class _$_SharedArticleState implements _SharedArticleState {
   const _$_SharedArticleState(
       {required this.articleState,
       required this.headlineArticleState,
-      required final List<String> watchedArticlesIds})
+      required final Set<String> watchedArticlesIds})
       : _watchedArticlesIds = watchedArticlesIds;
 
   factory _$_SharedArticleState.fromJson(Map<String, dynamic> json) =>
@@ -162,13 +162,13 @@ class _$_SharedArticleState implements _SharedArticleState {
   final ArticleState articleState;
   @override
   final ArticleState headlineArticleState;
-  final List<String> _watchedArticlesIds;
+  final Set<String> _watchedArticlesIds;
   @override
-  List<String> get watchedArticlesIds {
-    if (_watchedArticlesIds is EqualUnmodifiableListView)
+  Set<String> get watchedArticlesIds {
+    if (_watchedArticlesIds is EqualUnmodifiableSetView)
       return _watchedArticlesIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_watchedArticlesIds);
+    return EqualUnmodifiableSetView(_watchedArticlesIds);
   }
 
   @override
@@ -216,7 +216,7 @@ abstract class _SharedArticleState implements SharedArticleState {
   const factory _SharedArticleState(
       {required final ArticleState articleState,
       required final ArticleState headlineArticleState,
-      required final List<String> watchedArticlesIds}) = _$_SharedArticleState;
+      required final Set<String> watchedArticlesIds}) = _$_SharedArticleState;
 
   factory _SharedArticleState.fromJson(Map<String, dynamic> json) =
       _$_SharedArticleState.fromJson;
@@ -226,7 +226,7 @@ abstract class _SharedArticleState implements SharedArticleState {
   @override
   ArticleState get headlineArticleState;
   @override
-  List<String> get watchedArticlesIds;
+  Set<String> get watchedArticlesIds;
   @override
   @JsonKey(ignore: true)
   _$$_SharedArticleStateCopyWith<_$_SharedArticleState> get copyWith =>

@@ -75,83 +75,101 @@ class _Articles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: articlesCubit.update,
-      child: ListView.builder(
-        itemCount: state.articleState.articles.length + 1,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return const _HeadlineArticles();
-          } else {
-            final articles = state.articleState.articles;
-            final article = articles[index - 1];
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 5.0,
-              ),
-              child: Center(
-                child: GestureDetector(
-                  onTap: () {
-                    navigationCubit.pushArticle(article);
-                    articlesCubit.markArticleAsWatched(article);
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 2.0,
-                        color: state.watchedArticlesIds.contains(article.id)
-                            ? Colors.grey
-                            : Colors.greenAccent,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: IconButton(
+            onPressed: articlesCubit.markAllArticleAsWathced,
+            icon: const Icon(
+              Icons.remove_red_eye,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 10.0,
+        ),
+        Expanded(
+          child: RefreshIndicator(
+            onRefresh: articlesCubit.update,
+            child: ListView.builder(
+              itemCount: state.articleState.articles.length + 1,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return const _HeadlineArticles();
+                } else {
+                  final articles = state.articleState.articles;
+                  final article = articles[index - 1];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 5.0,
                     ),
-                    child: Column(
-                      children: [
-                        if (article.urlToImage != null)
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10.0),
-                              topRight: Radius.circular(10.0),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          navigationCubit.pushArticle(article);
+                          articlesCubit.markArticleAsWatched(article);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 2.0,
+                              color:
+                                  state.watchedArticlesIds.contains(article.id)
+                                      ? Colors.grey
+                                      : Colors.greenAccent,
                             ),
-                            child: Image.network(
-                              article.urlToImage!,
-                            ),
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                article.title,
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(
-                                height: 15.0,
-                              ),
-                              Text(
-                                article.author ?? 'Unknown',
+                              if (article.urlToImage != null)
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10.0),
+                                    topRight: Radius.circular(10.0),
+                                  ),
+                                  child: Image.network(
+                                    article.urlToImage!,
+                                  ),
+                                ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      article.title,
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(
+                                      height: 15.0,
+                                    ),
+                                    Text(
+                                      article.author ?? 'Unknown',
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            );
-          }
-        },
-      ),
+                  );
+                }
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

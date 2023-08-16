@@ -15,7 +15,7 @@ _$_SharedArticleState _$$_SharedArticleStateFromJson(
           json['headlineArticleState'] as Map<String, dynamic>),
       watchedArticlesIds: (json['watchedArticlesIds'] as List<dynamic>)
           .map((e) => e as String)
-          .toList(),
+          .toSet(),
     );
 
 Map<String, dynamic> _$$_SharedArticleStateToJson(
@@ -23,5 +23,5 @@ Map<String, dynamic> _$$_SharedArticleStateToJson(
     <String, dynamic>{
       'articleState': instance.articleState,
       'headlineArticleState': instance.headlineArticleState,
-      'watchedArticlesIds': instance.watchedArticlesIds,
+      'watchedArticlesIds': instance.watchedArticlesIds.toList(),
     };

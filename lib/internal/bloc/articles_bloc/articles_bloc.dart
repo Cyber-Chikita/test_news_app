@@ -11,7 +11,7 @@ import 'package:test_news_app/internal/bloc/articles_bloc/state/shared_article_s
 const initState = SharedArticleState(
   articleState: initArticleState,
   headlineArticleState: initArticleState,
-  watchedArticlesIds: [],
+  watchedArticlesIds: {},
 );
 
 const maxCachedArticlesLength = 10;
@@ -128,12 +128,28 @@ class ArticlesCubit extends HydratedCubit<SharedArticleState> {
 
   void markArticleAsWatched(Article article) => emit(
         state.copyWith(
-          watchedArticlesIds: [
+          watchedArticlesIds: {
             ...state.watchedArticlesIds,
             article.id,
-          ],
+          },
         ),
       );
+
+  void markAllArticleAsWathced() {
+    final articlesIds = state.articleState.articles.map((e) => e.id);
+    final headlineArticlesIds =
+        state.headlineArticleState.articles.map((e) => e.id);
+
+    emit(
+      state.copyWith(
+        watchedArticlesIds: {
+          ...state.watchedArticlesIds,
+          ...articlesIds,
+          ...headlineArticlesIds,
+        },
+      ),
+    );
+  }
 
   @override
   SharedArticleState? fromJson(Map<String, dynamic> json) =>
